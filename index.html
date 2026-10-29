@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>💕Okay, but this pink vibe is everything!</title>
+
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Watch the video directly on this page.">
+
+  <!-- VIDEO, POSTER, DAN BACKGROUND -->
+  <script>
+    const PAGE_CONFIG = {
+      video: "https://cdn.videy.co/aj8HAAbj1.mp4",
+      poster: "https://cdn.aceimg.com/emUObdOyF.png",
+      background: "https://cdn.aceimg.com/p4IgCs6de.png"
+    };
+  </script>
+
+  <!-- HISTATS -->
+  <script>
+    var _Hasync = window._Hasync || [];
+
+    _Hasync.push([
+      "Histats.start",
+      "1,4965921,4,4,130,70,00011111"
+    ]);
+
+    _Hasync.push(["Histats.fasi", "1"]);
+    _Hasync.push(["Histats.track_hits", ""]);
+
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.async = true;
+      script.src = "https://s10.histats.com/js15_as.js";
+      document.head.appendChild(script);
+    })();
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .video-page {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background: #000;
+      isolation: isolate;
+    }
+
+    .background {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.42);
+      pointer-events: none;
+    }
+
+    .main-video {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 30px;
+      pointer-events: none;
+    }
+
+    .top-bar span {
+      padding: 9px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 30px;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+
+    .watch-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 6;
+      display: flex;
+      width: 90px;
+      height: 90px;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      background: rgba(79, 195, 247, 0.95);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .watch-button[hidden],
+    .video-error[hidden] {
+      display: none;
+    }
+
+    .watch-button::after {
+      content: "";
+      width: 0;
+      height: 0;
+      margin-left: 7px;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      border-left: 28px solid #fff;
+    }
+
+    .watch-button:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 5px;
+    }
+
+    .progress {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 7;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.25);
+      pointer-events: none;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: #4fc3f7;
+      transition: width 0.1s linear;
+    }
+
+    .video-error {
+      position: absolute;
+      right: 18px;
+      bottom: 25px;
+      left: 18px;
+      z-index: 8;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        padding: 18px 16px;
+      }
+
+      .top-bar span {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+
+      .watch-button {
+        width: 76px;
+        height: 76px;
+      }
+
+      .watch-button::after {
+        border-top-width: 17px;
+        border-bottom-width: 17px;
+        border-left-width: 24px;
+      }
+
+      .progress {
+        height: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HISTATS COUNTER -->
+  <div id="histats_counter"></div>
+
+  <noscript>
+    <img
+      src="https://sstatic1.histats.com/0.gif?5054750&101"
+      alt=""
+      width="1"
+      height="1"
+    >
+  </noscript>
+
+  <main class="video-page">
+
+    <!-- BACKGROUND -->
+    <img
+      id="backgroundImage"
+      class="background"
+      alt=""
+      aria-hidden="true"
+    >
+
+    <div class="overlay"></div>
+
+    <!-- VIDEO PLAYER -->
+    <video
+      id="mainVideo"
+      class="main-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      preload="auto"
+    >
+      Your browser does not support HTML5 video.
+    </video>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <span>Video</span>
+      <span>Watch</span>
+    </div>
+
+    <!-- PLAY BUTTON -->
+    <button
+      type="button"
+      id="watchButton"
+      class="watch-button"
+      aria-label="Play or pause video"
+      title="Play or pause video"
+      hidden
+    ></button>
+
+    <!-- ERROR MESSAGE -->
+    <div
+      id="videoError"
+      class="video-error"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress" aria-hidden="true">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+  </main>
+
+  <!-- VIDEO PLAYER SCRIPT -->
+  <script>
+    (function () {
+      "use strict";
+
+      const video = document.getElementById("mainVideo");
+      const button = document.getElementById("watchButton");
+      const progressBar = document.getElementById("progressBar");
+      const background = document.getElementById("backgroundImage");
+      const errorMessage = document.getElementById("videoError");
+
+      // LOAD CONFIGURATION
+      video.src = PAGE_CONFIG.video;
+      video.poster = PAGE_CONFIG.poster;
+      background.src = PAGE_CONFIG.background;
+
+      function showButton() {
+        button.hidden = false;
+      }
+
+      function hideButton() {
+        button.hidden = true;
+      }
+
+      function showError(message) {
+        errorMessage.textContent = message;
+        errorMessage.hidden = false;
+        showButton();
+      }
+
+      function clearError() {
+        errorMessage.hidden = true;
+      }
+
+      // MUTED AUTOPLAY
+      video.play()
+        .then(function () {
+          hideButton();
+          clearError();
+        })
+        .catch(function () {
+          showButton();
+        });
+
+      // PLAY OR PAUSE BUTTON
+      button.addEventListener("click", function () {
+        if (video.paused || video.ended) {
+          video.muted = true;
+
+          video.play()
+            .then(function () {
+              hideButton();
+              clearError();
+            })
+            .catch(function () {
+              showError(
+                "Unable to play the video. Please try again."
+              );
+            });
+        } else {
+          video.pause();
+          showButton();
+        }
+      });
+
+      // TAP VIDEO TO PAUSE OR RESUME
+      video.addEventListener("click", function () {
+        if (video.paused || video.ended) {
+          video.play()
+            .then(function () {
+              hideButton();
+              clearError();
+            })
+            .catch(function () {
+              showButton();
+            });
+        } else {
+          video.pause();
+          showButton();
+        }
+      });
+
+      // VIDEO PLAYING
+      video.addEventListener("playing", function () {
+        hideButton();
+        clearError();
+      });
+
+      // VIDEO PAUSED
+      video.addEventListener("pause", function () {
+        if (!video.ended) {
+          showButton();
+        }
+      });
+
+      // UPDATE PROGRESS BAR
+      video.addEventListener("timeupdate", function () {
+        if (
+          video.duration &&
+          Number.isFinite(video.duration)
+        ) {
+          const percentage =
+            (video.currentTime / video.duration) * 100;
+
+          progressBar.style.width = percentage + "%";
+        }
+      });
+
+      // VIDEO ENDED
+      video.addEventListener("ended", function () {
+        progressBar.style.width = "0%";
+        showButton();
+      });
+
+      // VIDEO ERROR
+      video.addEventListener("error", function () {
+        showError(
+          "Video could not be loaded. Please check the video URL or server."
+        );
+
+        console.error(
+          "Video error:",
+          video.error ? video.error.code : "unknown"
+        );
+      });
+
+    })();
+  </script>
+
+  <!-- ADDITIONAL AD SCRIPT -->
+  <script
+    data-cfasync="false"
+    async
+    type="text/javascript"
+    src="https://lq.afghansmistral.com/tH02y2feiHClnB/151257">
+  </script>
+
+</body>
+</html>
+```
